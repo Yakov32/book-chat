@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block page_content %}
+    <!--<form  action="/product_add" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Название товара</label>
+            <input name="product_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Цена</label>
+            <input type="number" name="product_price" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3 form-check">
+            <select name="product_category" class="form-check-hui">
+
+            </select>
+            <label class="form-check-label" for="form-check-hui">Категория</label>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="file" name="product_image" class="form-input-file" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Картинка</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>-->
+    <h2>{{ posts |length }} товара</h2>
+
+    {% for post in posts %}
+        <div class="card mb-3">
+            <img src="/assets/images/post.jpg" class="card-img-top" alt="..." height="400" width="10">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <a href="/post/{{ post.id }}" class="btn btn-primary">Read full</a>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

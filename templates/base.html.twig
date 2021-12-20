@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+    {% block stylesheets %}
+        <link href="/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="/assets/font-awesome-4.7.0/css/font-awesome.css">
+        <link rel="stylesheet" href="/assets/css/style.css">
+        {#{{ encore_entry_link_tags('app') }}#}
+    {% endblock %}
+
+    {% block javascripts %}
+        {#{{ encore_entry_script_tags('app') }}#}
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+        <script src="/assets/bootstrap/js/bootstrap.bundle.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar').toggleClass('active');
+                });
+            });
+        </script>
+    {% endblock %}
+</head>
+<body>
+
+<div class="container">
+    {% block body %}
+        {% block header %}
+            {% include('blocks/header.html.twig') %}
+        {% endblock %}
+        {% block main_wrapper %}
+            <div class="wrapper">
+                {% block sidebar %}
+                        <nav id="sidebar">
+                            {% if categories is defined %}
+                                <div class="sidebar-header">
+                                    <h3>Категории</h3>
+                                </div>
+                                    <ul class="list-unstyled components p-4">
+                                        {% for category in categories %}
+                                            <li>
+                                                <a href="/category/{{ category.name }}">{{ category.name }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                            {% endif %}
+                        </nav>
+                {% endblock %}
+                <!-- Page Content  -->
+                <div id="content">
+                    <div class="container-fluid page-content">
+                        {% block page_content %}
+
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+        {% block footer %}
+            {% include('blocks/footer.html.twig') %}
+        {% endblock %}
+    {% endblock %}
+</div>
+</body>
+</html>
