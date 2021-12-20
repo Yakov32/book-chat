@@ -19,4 +19,5 @@
 .phpunit.result.cache
 /composer.lock
 /.idea/
+symfony.lock
 ###< phpunit/phpunit ###
