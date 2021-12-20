@@ -597,5 +597,8 @@
     },
     "webmozart/assert": {
         "version": "1.10.0"
+    },
+    "workerman/workerman": {
+        "version": "v4.0.25"
     }
 }
