@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
     libmcrypt-dev \
     libzip-dev
 
-RUN docker-php-ext-install pdo pdo_mysql zip
+RUN docker-php-ext-install pdo pdo_mysql zip pcntl posix
 
 RUN wget https://getcomposer.org/installer -O - -q | php -- --install-dir=/bin --filename=composer --quiet
 
