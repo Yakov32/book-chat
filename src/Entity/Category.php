@@ -24,11 +24,6 @@ class Category
      */
     private string $name;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
-     */
-    private $parent;
 
     public function getId()
     {
@@ -43,18 +38,6 @@ class Category
     public function setName(string $name)
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    public function setParent(Category $parent)
-    {
-        $this->parent = $parent;
 
         return $this;
     }
