@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block page_content %}
+    <h2>{{ books |length }} товара</h2>
+
+    <div class="row">
+        {% for book in books %}
+            <div class="col-4 col-">
+                <div class="card mb-4">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                        <!--<img src="/assets/images/" class="img" width="300" height="270"/>
+                        <a href="#!">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </a>-->
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ book.name }}</h5>
+                        <div class="btn-group shadow-0" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
+                                <a href="#">{{ book.text }}&#8381</a>
+                            </button>
+                            <div></div>
+                            <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
+                                <a href="#"><i class="fa fa-heart-o text-danger" aria-hidden="true"></i><span class="p-1">1</span></a>
+                            </button>
+                            <div></div>
+                            <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
+                                Купить
+                            </button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}
