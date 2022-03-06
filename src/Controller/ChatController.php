@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Chat;
 use App\Entity\Message;
 use App\Entity\User;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,12 +30,12 @@ class ChatController extends AbstractController
     /**
      * @Route ("/chat/{id}", name="app_chat_id")
      */
-    public function chat($id)
+    public function chat($id, ManagerRegistry $doctrine)
     {
         $user = $this->getUser();
-
-        $userRep = $this->getDoctrine()->getRepository(User::class);
-        $chatRep = $this->getDoctrine()->getRepository(Chat::class);
+        $entityManager = $doctrine->getManager();
+        $userRep = $entityManager->getRepository(User::class);
+        $chatRep = $entityManager->getRepository(Chat::class);
 
         $chats = $user->getChats();
         $activeChat = $chatRep->find($id);
@@ -47,10 +48,11 @@ class ChatController extends AbstractController
     /**
      * @Route ("chat/{chatId}/add-message", name="app_chat_add_message")
      */
-    public function addMessage($chatId, Request $request)
+    public function addMessage($chatId, Request $request, ManagerRegistry $doctrine)
     {
         $user = $this->getUser();
-        $chatRep = $this->getDoctrine()->getRepository(Chat::class);
+        $entityManager = $doctrine->getManager();
+        $chatRep = $entityManager->getRepository(Chat::class);
         $chats = $user->getChats();
         $activeChat = $chatRep->find($chatId);
         $message = new Message();
@@ -62,8 +64,8 @@ class ChatController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        $em->persist($message);
-        $em->flush();
+        $entityManager->persist($message);
+        $entityManager->flush();
 
         return $this->render('chat/chats.html.twig', ['chats' => $chats, 'activeChat' => $activeChat]);
     }
